@@ -1,11 +1,15 @@
 package html;
 
+import grabber.Post;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import utils.SqlRuDateTimeParser;
 
 import java.io.IOException;
+import java.util.List;
 
 public class SqlParse {
     public static void main(String[] args) throws Exception {
@@ -25,5 +29,19 @@ public class SqlParse {
             Element date = td.parent().child(5);
             System.out.println(date.text());
         }
+    }
+
+    public static Post load(String url) throws IOException {
+        Post post = new Post();
+        post.setLink(url);
+        Document doc = Jsoup.connect(url).get();
+        List<TextNode> name = doc.select(".messageHeader").get(0).textNodes();
+        post.setName(name.get(0).text().trim());
+        Elements desc = doc.select(".msgBody");
+        post.setDescription(desc.get(1).text());
+        Elements date = doc.select(".msgFooter");
+        String fromFooter = date.get(0).text();
+        post.setCreated(new SqlRuDateTimeParser().parse(fromFooter.substring(0, fromFooter.indexOf("[") - 1)));
+        return post;
     }
 }
