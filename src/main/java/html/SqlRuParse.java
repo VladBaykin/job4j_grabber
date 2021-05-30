@@ -11,7 +11,7 @@ import utils.SqlRuDateTimeParser;
 import java.io.IOException;
 import java.util.List;
 
-public class SqlParse {
+public class SqlRuParse {
     public static void main(String[] args) throws Exception {
         String url = "https://www.sql.ru/forum/job-offers";
         for (int i = 1; i < 6; i++) {
