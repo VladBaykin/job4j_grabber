@@ -48,8 +48,8 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         }
         String[] parts = date.split(" ");
         int day = Integer.parseInt(parts[0]);
-        int mohtn = months.get(parts[1]);
+        int month = months.get(parts[1]);
         int year = Integer.parseInt(parts[2]) + 2000;
-        return LocalDate.of(year, mohtn, day);
+        return LocalDate.of(year, month, day);
     }
 }
