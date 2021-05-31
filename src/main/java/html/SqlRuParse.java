@@ -7,13 +7,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import utils.SqlRuDateTimeParser;
+import utils.DateTimeParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SqlRuParse implements Parse {
+    private final DateTimeParser parser;
+
+    public SqlRuParse(DateTimeParser parser) {
+        this.parser = parser;
+    }
+
     public static void main(String[] args) throws Exception {
         String url = "https://www.sql.ru/forum/job-offers";
         for (int i = 1; i < 6; i++) {
@@ -62,7 +68,7 @@ public class SqlRuParse implements Parse {
             post.setDescription(desc.get(1).text());
             Elements date = doc.select(".msgFooter");
             String fromFooter = date.get(0).text();
-            post.setCreated(new SqlRuDateTimeParser().parse(fromFooter.substring(0, fromFooter.indexOf("[") - 1)));
+            post.setCreated(parser.parse(fromFooter.substring(0, fromFooter.indexOf("[") - 1)));
         } catch (IOException e) {
             e.printStackTrace();
         }

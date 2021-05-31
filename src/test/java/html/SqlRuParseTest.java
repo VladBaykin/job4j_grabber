@@ -2,6 +2,7 @@ package html;
 
 import grabber.Post;
 import org.junit.Test;
+import utils.SqlRuDateTimeParser;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -12,7 +13,7 @@ public class SqlRuParseTest {
 
     @Test
     public void load() {
-        SqlRuParse parse = new SqlRuParse();
+        SqlRuParse parse = new SqlRuParse(new SqlRuDateTimeParser());
         String url =
                 "https://www.sql.ru/forum/1325330/lidy-be-fe-senior-cistemnye-analitiki-qa-i-devops-moskva-do-200t";
         Post post = parse.detail(url);
