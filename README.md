@@ -5,9 +5,10 @@
 Архитектура позволяет расширить его для парсинга вакансий с других сайтов.
 
 ## Технологии
-- Postgresql в качестве хранилища данных
-- JDBC для коннекта к БД
-- Jsoup для парсинга
-- Quartz для периодизации работы
+- Java 15
+- Postgresql
+- JDBC
+- Jsoup
+- Quartz
 
 ![ScreenShot](screenshots/sql_parse.JPG)
